@@ -1,0 +1,15 @@
+.game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .game-image {
+    position: absolute;
+    cursor: pointer;
+    transition: top 0.3s ease, left 0.3s ease;
+    border: 2px solid #fff;
+    border-radius: 10px;
+  }
+  

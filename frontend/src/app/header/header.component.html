@@ -1,0 +1,32 @@
+<header class="bg-dark text-light py-3">
+  <div class="container d-flex justify-content-between align-items-center">
+    <!-- Titre -->
+    <h1 class="m-0">Jeu Clic</h1>
+
+    <!-- Navigation -->
+    <nav>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/game-results" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Resultats</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/game" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Game</a>
+        </li>
+      </ul>
+    </nav>
+    
+    <!-- Connexion / Déconnexion -->
+    <div *ngIf="pseudo; else notLoggedIn" class="d-flex align-items-center">
+      <span class="me-2">{{ pseudo }}</span>
+      <button class="btn btn-danger" (click)="logout()">Se déconnecter</button>
+    </div>
+
+    <!-- Template pour utilisateur non connecté -->
+    <ng-template #notLoggedIn>
+      <button class="btn btn-primary" (click)="login()">Se connecter</button>
+    </ng-template>
+  </div>
+</header>

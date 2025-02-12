@@ -1,0 +1,91 @@
+<div class="results-container container my-5">
+  <h2 class="text-center mb-4">Résultats</h2>
+
+
+  <div *ngIf="gameId">
+  <h3 class="mb-3">Temps des clics :</h3>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th>
+        <th>Temps (ms)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let click of clicks">
+        <td>Clic {{ click.numeroClic }}</td>
+        <td><strong>{{ click.chrono }} ms</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div *ngIf="userGames.length > 0">
+  <h3 class="mb-3">Vos parties :</h3>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Pseudo</th>
+        <th>Meilleur chrono (ms)</th>
+        <th>Moyenne des chronos (ms)</th>
+       
+        <th>Voir les clics</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of getUserGamesPaginated()">
+        <td [ngClass]="{ 'bg-warning': game.id == gameId }">{{ game.pseudo }}</td>
+        <td [ngClass]="{ 'bg-warning': game.id == gameId }"><strong>{{ game.bestChrono }} ms</strong></td>
+        <td [ngClass]="{ 'bg-warning': game.id == gameId }"><strong>{{ game.moyenneChronos }} ms</strong></td>
+        
+        <td [ngClass]="{ 'bg-warning': game.id == gameId }">
+          <button (click)="navigate(game.id)" class="btn btn-info btn-sm">
+            Voir les clics
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between">
+    <button *ngIf="currentPageUser > 1" (click)="prevPageUser()" class="btn btn-secondary">Précédent</button>
+    <span *ngIf="userGames.length > resultperpage">Page {{ currentPageUser }}</span>
+    <button *ngIf="currentPageUser * resultperpage < userGames.length" 
+      (click)="nextPageUser()" class="btn btn-secondary">Suivant</button>
+  </div>
+  </div>
+
+  
+  <h3 class="mb-3">Classement général :</h3>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Pseudo</th>
+        <th>Meilleur chrono (ms)</th>
+        <th>Moyenne des chronos (ms)</th>
+        
+        <th>Voir les clics</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of getAllGamesPaginated()">
+        <td [ngClass]="{ 'bg-warning': game.id == gameId, 'bg-primary': game.pseudo == pseudo && game.id != gameId }">{{ game.pseudo }}</td>
+        <td [ngClass]="{ 'bg-warning': game.id == gameId, 'bg-primary': game.pseudo == pseudo && game.id != gameId }"><strong>{{ game.bestChrono }} ms</strong></td>
+        <td [ngClass]="{ 'bg-warning': game.id == gameId, 'bg-primary': game.pseudo == pseudo && game.id != gameId }"><strong>{{ game.moyenneChronos }} ms</strong></td>
+        
+        <td [ngClass]="{ 'bg-warning': game.id == gameId, 'bg-primary': game.pseudo == pseudo && game.id != gameId }">
+          <button (click)="navigate(game.id)" class="btn btn-info btn-sm">
+            Voir les clics
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between">
+    <button *ngIf="currentPageGlobal > 1" (click)="prevPageGlobal()" class="btn btn-secondary">Précédent</button>
+    <span *ngIf="allGames.length > resultperpage">Page {{ currentPageGlobal }}</span>
+    <button *ngIf="currentPageGlobal * resultperpage < allGames.length" 
+      (click)="nextPageGlobal()" class="btn btn-secondary">Suivant</button>
+  </div>
+</div>

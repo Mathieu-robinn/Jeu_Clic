@@ -1,0 +1,9 @@
+.start-image {
+  max-width: 300px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.start-image:hover {
+  transform: scale(1.1);
+}

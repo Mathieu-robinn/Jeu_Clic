@@ -1,0 +1,13 @@
+<div class="game-container" [class.fullscreen]="isGameStarted">
+    <p class="lead text-center mt-4" *ngIf="!isGameStarted">Cliquez sur l'image pour commencer le jeu</p>
+    <img 
+      [src]="imageSrc" 
+      [style.top]="position.top" 
+      [style.left]="position.left" 
+      [style.width.px]="imageSize"
+      [style.height.px]="imageSize"
+      (click)="onClick()" 
+      class="game-image"
+    />
+  </div>
+  

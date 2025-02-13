@@ -23,17 +23,13 @@ export class GameResultsComponent implements OnInit {
   currentPageUser: number = 1;
   currentPageGlobal: number = 1;
 
-  averageTime: number = 0;
-  userRanking: number = 0;
-  globalRanking: number = 0;
-
   constructor(private router: Router, private route: ActivatedRoute, private gameService: GameService, private sessionService: SessionService) {}
 
   ngOnInit(): void {
     //console.log("Début");
     
     if (!this.sessionService.getPseudo()) {
-      this.router.navigate(['/pseudo']);
+      this.router.navigate(['/pseudo'], { queryParams: { redirect: '/game-results' } });
       return;
     }
 
@@ -57,28 +53,21 @@ export class GameResultsComponent implements OnInit {
       this.gameService.getClicksByGameId(this.gameId).subscribe(data => {
         //console.log(data);
         this.clicks = data;
-        this.averageTime = this.calculateAverageTime();
       });
     }
 
     this.gameService.getGamesByUser(this.pseudo).subscribe(data => {
       //console.log(data);
       this.userGames = [...data].sort((a, b) => a.moyenneChronos - b.moyenneChronos);
-      this.userRanking = this.userGames.findIndex(game => game.id === this.gameId) + 1;
     });
 
     this.gameService.getAllGames().subscribe(data => {
       //console.log(data);
       this.allGames = [...data].sort((a, b) => a.moyenneChronos - b.moyenneChronos);
-      this.globalRanking = this.allGames.findIndex(game => game.id === this.gameId) + 1;
     });
   }
 
-  calculateAverageTime(): number {
-    if (this.clicks.length === 0) return 0;
-    const total = this.clicks.reduce((sum, click) => sum + click.time, 0);
-    return total / this.clicks.length;
-  }
+  
 
   navigate(game_id: number): void {
     this.router.navigate(['/game-results'], { queryParams: { gameId: game_id } });
@@ -107,7 +96,7 @@ export class GameResultsComponent implements OnInit {
     const start = (this.currentPageGlobal - 1) * this.resultperpage;
     return this.allGames.slice(start, start + this.resultperpage);
   }
-
+  
   nextPageGlobal(): void {
     if ((this.currentPageGlobal * this.resultperpage) < this.allGames.length) {
       this.currentPageGlobal++;

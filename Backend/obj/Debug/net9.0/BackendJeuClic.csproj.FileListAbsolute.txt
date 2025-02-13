@@ -74,3 +74,4 @@ C:\wamp64\www\projet_ONYX\backend\obj\Debug\net9.0\refint\BackendJeuClic.dll
 C:\wamp64\www\projet_ONYX\backend\obj\Debug\net9.0\BackendJeuClic.pdb
 C:\wamp64\www\projet_ONYX\backend\obj\Debug\net9.0\BackendJeuClic.genruntimeconfig.cache
 C:\wamp64\www\projet_ONYX\backend\obj\Debug\net9.0\ref\BackendJeuClic.dll
+C:\wamp64\www\projet_ONYX\backend\obj\Debug\net9.0\BackendJeuClic.sourcelink.json

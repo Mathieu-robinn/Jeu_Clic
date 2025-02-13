@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from '../services/session.service';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,19 +13,25 @@ import { FormsModule } from '@angular/forms';
 })
 export class PseudoComponent implements OnInit {
   pseudo: string = '';
+  redirectUrl: string = '/home';
 
-  constructor(private sessionService: SessionService, private router: Router) {}
+  constructor(private sessionService: SessionService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    
+    this.route.queryParams.subscribe((params) => {
+      this.redirectUrl = params['redirect'] || '/home';
+    });
+
     if (this.sessionService.getPseudo()) {
-      this.router.navigate(['/home']);
+      this.router.navigate([this.redirectUrl]);
     }
   }
-
+  
   savePseudo(): void {
     if (this.pseudo.trim()) {
       this.sessionService.setPseudo(this.pseudo);
-      this.router.navigate(['/home']); 
+      this.router.navigate([this.redirectUrl]);
     }
   }
 

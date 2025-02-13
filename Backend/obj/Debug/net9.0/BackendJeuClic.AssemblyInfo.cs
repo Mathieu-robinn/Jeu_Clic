@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BackendJeuClic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22d626b42f40f9c0b4b3226ca4f48545e189251d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BackendJeuClic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BackendJeuClic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

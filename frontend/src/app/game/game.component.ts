@@ -37,7 +37,7 @@ export class GameComponent implements OnInit, AfterViewInit {
     //this.testRequests()
     
     if (!this.sessionService.getPseudo()) {
-      this.router.navigate(['/pseudo']);
+      this.router.navigate(['/pseudo'], { queryParams: { redirect: '/game' } });
       return;
     }
 
@@ -70,12 +70,6 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.enterFullscreen();
     this.scrollToGame();
     this.startTime = performance.now();
-
-    this.gameResults = {
-      bestTime: Infinity, // Le meilleur temps est initialement très élevé
-      totalTime: 0,       // Le temps total commence à zéro
-      clickTimes: []      // Un tableau vide pour stocker les temps des clics
-    };
     
     const gameData = {
       pseudo: this.sessionService.getPseudo(),
@@ -119,12 +113,10 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   scrollToGame(): void {
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      });
-    }, 300);
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
   }
 
   onClick(): void {
